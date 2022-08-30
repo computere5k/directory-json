@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+  <head>    
+     <script src="https://rss2json.com/gfapi.js"></script>
+  </head>
+  <body>
+    <p><b>Result from the API:</b></p>
+    <div id="feed"></div>
+      <script>
+
+google.load("feeds", "1");
+
+    function initialize() {
+      var feed = new google.feeds.Feed("https://pestadvisories.usu.edu/feed/");
+      feed.load(function(result) {
+        if (!result.error) {
+          var container = document.getElementById("feed");
+          for (var i = 0; i < result.feed.entries.length; i++) {
+            var entry = result.feed.entries[i];
+            var div = document.createElement("div");
+            div.appendChild(document.createTextNode(entry.title));
+            container.appendChild(div);
+          }
+        }
+      });
+    }
+    google.setOnLoadCallback(initialize);
+      </script>
+  </body>
+</html>

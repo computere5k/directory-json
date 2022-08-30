@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+  <head>    
+      <title>RSS Feed</title>
+      <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+      integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N"
+      crossorigin="anonymous"
+    />
+    <style>
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        font-weight: bold !important;
+      }
+    </style>
+  </head>
+  <body>
+      <div class="container my-4">
+          <h1>Sample RSS Feed</h1>
+    <h2 id="feed-title">Feed Title</h2>
+          <ul class="list-unstyled" id="rss-content">
+          </ul>
+      </div>
+      <script>
+fetch("https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fpestadvisories.usu.edu%2Ffeed%2F")
+        .then((response) => response.json())
+        .then((data) => {
+    var i, feedItem;
+    feedItem = "";
+for (i = 0; i < 10; i++) 
+{feedItem += "<div class='row mb-3'><div class='col-3 align-self-center'><a href='" + data.items[i].link + "' target='_blank'><img src='" + data.items[i].thumbnail + "' alt='' class='w-100'/></a></div>" + "<div class='col-9 align-self-center'><a href='" + data.items[i].link + "' target='_blank'><h3>" + data.items[i].title + "</h3></a><p class='mb-2'>" + data.items[i].description + "</p><p class='text-secondary my-0'><small>" + data.items[i].pubDate + "</small></p></div></div>";
+}
+        document.getElementById("rss-content").innerHTML = feedItem;
+    document.getElementById("feed-title").innerHTML = data.feed.title;
+})
+      </script>
+          <script
+      src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
